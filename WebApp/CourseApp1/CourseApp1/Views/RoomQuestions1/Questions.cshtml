@@ -1,0 +1,61 @@
+﻿@model CourseApp1.data.RoomQuestion
+@{
+    ViewBag.Title = "Questions";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<div class="courses_wrapper">
+    <div class="room_post_name_search">
+        <div class="d-flex flex-row justify-content-center align-content-center">
+            <a href="@Url.Action("Index","RoomQuestions1")" class="course_back"><span id="back_span" class="material-symbols-outlined">arrow_back_ios</span></a>
+            <h1 class="courses_header">@ViewBag.RoomName</h1>
+        </div>
+        @using (@Html.BeginForm("Questions", "RoomQuestions1", FormMethod.Get, new { @class = "courses_form" }))
+        {
+            <div class="search_form">
+                @*<input type="text" class="search-input" id="searchroom" placeholder="search a question">*@
+                @Html.TextBox("search", null, new { @class = "search-input", placeholder = "Search a question" })
+                <button type="submit" class="search_button base_button">search</button>
+            </div>
+        }
+    </div>
+
+    @using (Html.BeginForm("Questions", "RoomQuestions1", FormMethod.Post, new { @class = "ask_form" }))
+    {
+        
+        <div class="ask_layout_form">
+            @*<input type="text" class="ask_input" id="ask_question" placeholder="ask a question">*@
+            @Html.AntiForgeryToken()
+            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "ask_input", @placeholder = "Enter Your Question" } })
+            <button type="submit" class="ask_button base_button"><span class="material-symbols-outlined">add</span></button>
+        </div>
+    }
+    @*<form action="" class="ask_form">
+        <div class="ask_layout_form">
+            <input type="text" class="ask_input" id="ask_question" placeholder="ask a question">
+            <button type="button" class="ask_button base_button"><span class="material-symbols-outlined">add</span></button>
+        </div>
+    </form>*@
+
+    <div class="questions_wrapper">
+        <!--LOOP OVER <A>-->
+        @foreach (var item in ViewBag.Questions)
+        {
+            <a href="@Url.Action("Answers","RoomQuestions1",new { id = item.QuestionId})" class="question_link text-decoration-none">
+                <div class="question">
+                    <div class="question_info">
+                        <h2 class="question_text">
+                            @item.Content
+                        </h2>
+                        <div class="email_date">
+                            <h4 class="question_email">@item.AspNetUser.Email</h4>
+                            <h4 class="question_date">@item.CreationDate</h4> <h4 class="ansers_num">Answers : @item.Answers.Count</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+
+
+
+    </div>
+</div>

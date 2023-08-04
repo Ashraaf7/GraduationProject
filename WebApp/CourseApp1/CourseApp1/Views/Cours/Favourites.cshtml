@@ -1,0 +1,54 @@
+﻿@model IEnumerable<CourseApp1.data.Favourite>
+
+@{
+    ViewBag.Title = "Favourites";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<div class="d-flex flex-row justify-content-start align-content-center">
+    <a href="@Url.Action("Index","Default")" class="course_back"><span id="back_span" class="material-symbols-outlined">arrow_back_ios</span></a>
+    <h1 class="courses_header">My Favourites</h1>
+</div>
+
+
+<table class="table">
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cours.Name)
+            </td>
+            <td>
+                <a class="text-decoration-none" href="@Url.Action("Details","Cours",new { id = item.Cours.ID })">
+                    <button class="btn btn btn-primary">Go to the Course</button>
+                </a>
+                |
+                @*<a class="text-decoration-none" href="@Url.Action("Details","Cours",new { id = item.favId })">
+                        <button class="btn bg-danger">Remove from favourites</button>
+                    </a>*@
+                @*@using (Html.BeginForm("Favourites", "Cours", FormMethod.Post, new { id = item.favId }))
+                    {
+
+                        <input type="submit" value="Remove from favourites" class="btn bg-danger" />
+                    }*@
+                <input type="button" id="btnDeleteUser" value="Remove from favourites" onclick="Delete(@item.favId)" class="btn badge-danger" />
+            </td>
+        </tr>
+    }
+
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript">
+    function Delete(Id) {
+        $.post("/Cours/DeleteUserJ", { Id: Id }, function (data) {      //passing the id of the selected user to the action method for deletion
+            if (data != null) {
+                location.reload();
+                alert("Removed from favourites");
+            }
+            else {
+                alert("Something went wrong");
+            }
+        });
+    }
+</script> 

@@ -1,0 +1,79 @@
+﻿@model CourseApp1.data.Answer
+
+@{
+    ViewBag.Title = "Answers";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<div class="courses_wrapper">
+    <div class="room_post_name_search">
+        <div class="d-flex flex-row justify-content-center align-content-center">
+            <a href="@Url.Action("Questions","RoomQuestions1",new { id = ViewBag.RoomId})" class="course_back"><span id="back_span" class="material-symbols-outlined">arrow_back_ios</span></a>
+            <h1 class="courses_header">Questions</h1>
+        </div>
+        @using (@Html.BeginForm("Answers", "RoomQuestions1", FormMethod.Get, new { @class = "courses_form" }))
+        {
+            <div class="search_form">
+                @*<input type="text" class="search-input" id="searchanswer" placeholder="search a answer">*@
+                @Html.TextBox("search", null, new { @class = "search-input", placeholder = "Search For Answer" })
+                <button type="submit" class="search_button base_button">search</button>
+            </div>
+        }
+
+        @*<form action="" class="courses_form">
+            <div class="search_form">
+                <input type="text" class="search-input" id="searchanswer" placeholder="search a answer">
+                <button type="button" class="search_button base_button">search</button>
+            </div>
+        </form>*@
+    </div>
+    <div class="question mb-5">
+        <div class="question_info">
+            <h2 class="question_text">
+                @ViewBag.Question
+            </h2>
+            <div class="email_date">
+                <h4 class="question_email">@ViewBag.User</h4>
+                <h4 class="question_date">@ViewBag.Date</h4>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm("Answers", "RoomQuestions1", FormMethod.Post, new { @class = "ask_form" }))
+    {
+
+        <div class="ask_layout_form">
+            @*<input type="text" class="ask_input" id="add_answer" placeholder="add an asnwer">*@
+            @Html.AntiForgeryToken()
+            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "ask_input", @placeholder = "Enter Your Answer" } })
+            <button type="submit" class="ask_button base_button"><span class="material-symbols-outlined">add</span></button>
+        </div>
+    }
+    @*<form action="" class="ask_form">
+        <div class="ask_layout_form">
+            <input type="text" class="ask_input" id="add_answer" placeholder="add an asnwer">
+            <button type="button" class="ask_button base_button"><span class="material-symbols-outlined">add</span></button>
+        </div>
+    </form>*@
+
+    <div class="questions_wrapper">
+        <!--LOOP OVER <A>-->
+        @foreach (var item in ViewBag.Answers)
+        {
+            <a href="" class="question_link text-decoration-none pe-none">
+                <div class="question">
+                    <div class="question_info">
+                        <h2 class="question_text">
+                            @item.Content
+                        </h2>
+                        <div class="email_date">
+                            <h4 class="question_email">@item.AspNetUser.Email</h4>
+                            <h4 class="question_date">@item.CreationDate</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+
+
+
+    </div>
+</div>

@@ -1,0 +1,137 @@
+﻿@model CourseApp1.data.Cours
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+    string replace = "embed/videoseries?";
+    string old = "playlist?";
+    var message=TempData["message"] ?? string.Empty;
+}
+
+
+@*<body style="background-color:black">
+
+        <div class="p-5 w-100 d-flex flex-row justify-content-center ">
+            <div class="left w-50"><img class="w-75" src="~/Uploads/Courses/@Model.ImgPath" alt="" srcset=""></div>
+            <div class="right w-50">
+                <div class="right_list p-5">
+                    <h1 class="fw-bold text-black py-3">@Model.Name</h1>
+                    <div class="d-flex flex-row justify-content-between w-75">
+                        <h2 class="text-black">@Model.Trainer.Name</h2>
+                        <h2 class="text-black">@Model.Category.Name</h2>
+                    </div>
+                    <h3 class="text-black">@Model.Creation_Date</h3>
+                    <button class="py-2 px-4 rounded-2"><a href="@Model.CourseLink" class="text-decoration-none "><h4>WATCH VIDEO</h4></a></button>
+                    <h4 class="text-black">@Model.Description</h4>
+                </div>
+
+            </div>
+        </div>
+        @if (Model.CourseLink.Contains("youtube.com"))
+        {
+            <div class="w-100 d-flex flex-column justify-content-center align-items-center">
+                <iframe width="800" height="500" src="@Model.CourseLink.Replace(old, replace)" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            </div>
+        }
+
+    </body>*@
+
+<div class="course_details_wrapper">
+    <img class="course_details_img" src="~/Uploads/Courses/@Model.ImgPath" alt="">
+    <div class="course_details_info">
+        <h1 class="course_detail_name">@Model.Name</h1>
+        <div class="course_detail_by_category">
+            <h3 class="course_detail_by">@Model.Trainer.Name</h3>
+            <h3 class="course_detail_category">@Model.Category.Name</h3>
+        </div>
+        <h3 class="course_detail_time">@Model.Creation_Date</h3>
+        <h4 class="course_detail_desc">
+            @Model.Description
+        </h4>
+        <button class="course_detail_button base_button"><a href="@Model.CourseLink" class="text-decoration-none ">WATCH VIDEO</a></button>
+        @if (ViewBag.Added == "added")
+        {
+            <button class="course_detail_button base_button" type="button" disabled>Added to favourites</button>
+        }
+        else
+        {
+            using (Html.BeginForm("Details", "Cours", FormMethod.Post, new { id = Model.ID }))
+            {
+                @Html.AntiForgeryToken()
+
+                <button class="course_detail_button base_button" type="submit">Add to favourites</button>
+            }
+        }
+        
+
+
+    </div>
+
+</div>
+
+
+@if (Model.CourseLink.Contains("youtube.com"))
+{
+    <div class="course_detail_iframe">
+        <iframe width="800" height="500" src="@Model.CourseLink.Replace(old, replace)"
+                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+    </div>
+}
+
+@*<script type="text/javascript">
+var message = '@message';
+if(message)
+    alert(message);
+</script>*@
+@*<input id="Hidden1" type="hidden" value="@Model.ID"/>
+<input id="Hidden2" type="hidden" value="@User.Identity.GetUserId()" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    function savedata() {
+        var CID = $("#Hidden1").val()
+        var UID = $("#Hidden2").val()
+        console.log(formdata)
+            
+        $.ajax({
+            url: "/Cours/add_fav",
+            type: "POST",
+            data: { 'CourseId': CID, 'UserId': UID },
+            success: function () {
+                alert("added");
+
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }
+</script>*@
+@*<script type="text/javascript">
+
+   $(document).ready(function () {
+    $("#btnSave").click(function () {
+        //alert("");
+        var favourite = {};
+        favourite.CourseId = $(@Model.ID).val();
+        favourite.UserId = $(@User.Identity.GetUserId()).val();
+        $.ajax({
+            type: "POST",
+            url: 'Cours/add_fav',
+            data: '{favourite: ' + JSON.stringify(favourite) + '}',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                alert("Data has been added successfully.");
+            },
+            error: function () {
+                alert("Error while inserting data");
+            }
+        });
+
+    });
+});
+</script>*@
+
+

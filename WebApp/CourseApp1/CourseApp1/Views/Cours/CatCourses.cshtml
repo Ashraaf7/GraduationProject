@@ -1,0 +1,44 @@
+﻿@*@model IEnumerable<CourseApp1.data.Cours>*@
+@model IPagedList<CourseApp1.data.Cours>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "CatCourses";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<div class="courses_wrapper">
+    <div class="d-flex flex-row justify-content-start align-content-center">
+        <a href="@Url.Action("Index","Default")" class="course_back"><span id="back_span" class="material-symbols-outlined">arrow_back_ios</span></a>
+        <h1 class="courses_header">COURSES</h1>
+    </div>    
+    <div class="coursescards_wrapper">
+        <!--LOOP OVER CARD DIV-->
+        @foreach (var item in Model)
+        {
+
+            <div class="card">
+                <button class="fav_button"><span class="nav_list_text material-symbols-outlined">favorite</span></button>
+                <a href="@Url.Action("Details", "Cours", new {id=item.ID})" class="card_wrapper">
+                    @if (item.ImgPath != null)
+                    {
+                        <img class="card_img" src="~/Uploads/Courses/@item.ImgPath" alt="">
+                    }
+                    else
+                    {
+                        <img class="card_img" src="~/Uploads/images/alt img.jpg" alt="Nature Image">
+                    }
+                    <div class="card_info">
+                        <h2 class="card_name">@item.Name</h2>
+                        <h4 class="card_by">@item.Trainer.Name</h4>
+                    </div>
+                </a>
+            </div>
+
+        }
+
+    </div>
+    @Html.PagedListPager(Model, page => Url.Action("CatCourses"))
+
+
+</div>

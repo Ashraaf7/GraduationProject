@@ -1,0 +1,120 @@
+version: "3.1"
+
+nlu:
+- intent: StartConversation
+  examples: |
+    - Starting
+
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: ask_for_Roadmap
+  examples: |
+    - what is the [roadmap](recommendation) for 
+    - I want a software testing [roadmap](recommendation)  
+    - I need ios developer [roadmap](recommendation) 
+
+
+- intent: ask_for_Course
+  examples: |
+    - I want a software testing [course](courses)  
+    - I need a software testing [course](courses) 
+    - What's the best [course](courses) in deep learning 
+    - Can you recommend a good [course](courses)
+
+
+- lookup: recommendation
+  examples: |
+    - roadmap       
+    - road map
+    - start
+    - recommend
+    - recommendtion
+
+
+  
+- lookup: courses
+  examples: |
+    - videos
+    - video
+    - course
+    - courses
+
+
+

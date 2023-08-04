@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4bfedeb304a7494d932d225dc59497d9" Name="Diagram1" ZoomLevel="68">
+        <EntityTypeShape EntityType="courses_dbModel.Admin" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="courses_dbModel.Category" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="courses_dbModel.Course_lessons" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="courses_dbModel.Cours" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="courses_dbModel.Trainee" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="courses_dbModel.Trainee_Courses" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="courses_dbModel.Trainer" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="courses_dbModel.FK_Categories_Categories_parId" ManuallyRouted="false" />
+        <AssociationConnector Association="courses_dbModel.FK_Courses_Categories_id" ManuallyRouted="false" />
+        <AssociationConnector Association="courses_dbModel.FK_Course_lessons_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="courses_dbModel.FK_Courses_Trainer" ManuallyRouted="false" />
+        <AssociationConnector Association="courses_dbModel.FK_Trainee_Courses_Courses_id" ManuallyRouted="false" />
+        <AssociationConnector Association="courses_dbModel.FK_Trainee_Courses_Trainee_id" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="courses_dbModel.sysdiagram" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="courses_dbModel.Roadmap_courses" Width="1.5" PointX="9.625" PointY="3.875" />
+        <EntityTypeShape EntityType="courses_dbModel.Roadmap" Width="1.5" PointX="7.375" PointY="4.25" />
+        <AssociationConnector Association="courses_dbModel.FK_Roadmap_courses_Roadmaps1" />
+        <EntityTypeShape EntityType="courses_dbModel.C__MigrationHistory" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="courses_dbModel.AspNetRole" Width="1.5" PointX="8.375" PointY="9.5" />
+        <EntityTypeShape EntityType="courses_dbModel.AspNetUserClaim" Width="1.5" PointX="12.875" PointY="10.625" />
+        <EntityTypeShape EntityType="courses_dbModel.AspNetUserLogin" Width="1.5" PointX="12.875" PointY="8" />
+        <EntityTypeShape EntityType="courses_dbModel.AspNetUser" Width="1.5" PointX="10.625" PointY="8.375" />
+        <AssociationConnector Association="courses_dbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="courses_dbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="courses_dbModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="courses_dbModel.Answer" Width="1.5" PointX="15.875" PointY="1" />
+        <EntityTypeShape EntityType="courses_dbModel.RoomQuestion" Width="1.5" PointX="13.625" PointY="0.875" />
+        <EntityTypeShape EntityType="courses_dbModel.Room" Width="1.5" PointX="11.375" PointY="1.125" />
+        <AssociationConnector Association="courses_dbModel.FK_Answers_RoomQuestions" />
+        <AssociationConnector Association="courses_dbModel.FK_RoomQuestions_Rooms" />
+        <AssociationConnector Association="courses_dbModel.FK_Answers_AspNetUsers" />
+        <AssociationConnector Association="courses_dbModel.FK_RoomQuestions_AspNetUsers" />
+        <EntityTypeShape EntityType="courses_dbModel.RoadmapLink" Width="1.5" PointX="11.875" PointY="5.125" />
+        <AssociationConnector Association="courses_dbModel.FK_RoadmapLinks_Roadmap_courses" />
+        <EntityTypeShape EntityType="courses_dbModel.Favourite" Width="1.5" PointX="14.875" PointY="5" />
+        <AssociationConnector Association="courses_dbModel.FK_Favourites_AspNetUsers" />
+        <AssociationConnector Association="courses_dbModel.FK_Favourites_Courses" />
+        <EntityTypeShape EntityType="courses_dbModel.Book" Width="1.5" PointX="3" PointY="10.75" />
+        <AssociationConnector Association="courses_dbModel.FK_Books_Categories" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

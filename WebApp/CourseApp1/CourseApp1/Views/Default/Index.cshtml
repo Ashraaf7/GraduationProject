@@ -1,0 +1,77 @@
+﻿@model IEnumerable<CourseApp1.data.Cours>
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<div class="hero_pc  ">
+    <div class="hero_info">
+        <h1 class="hero_header hero_text_large hero_text_color">CS <br> <b class="hero_text_large hero_text_color">COURSES</b> </h1>
+        <h4 class="hero_text">
+            Codify is a website that leads those interested in computer science to their road. Helping computer science students and all interested in that field through a website that collects resources, courses, and roadmaps in one place. Guiding them using a chatbot as a friend to help you with anything you need such as:<br />
+            -Ask it any questions about CS fields<br />
+            -Request a particular course<br />
+            -Request a video to explain a specific topic<br />
+            -Ask for any technical terminologies<br />
+        </h4>
+        <button class="hero_button d-flex flex-row justify-content-center align-content-center"><h4 class="button_text d-flex flex-row align-items-center justify-content-center mx-2">see more<span class="material-symbols-outlined mx-3">arrow_forward</span></h4></button>
+    </div>
+    <img class="hero_img" src="~/Uploads/images/home_hero.png" alt="">
+</div>
+<div class="sliders">
+    <div class="courses_slider">
+        <h1 class="slider_header">COURSES</h1>
+        <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+                          slides-per-view="5">
+            <!--LOOP OVER SWIPER SLIDE-->
+            @foreach (var item in Model)
+            {
+                <swiper-slide>
+                    <a href="@Url.Action("Details", "Cours", new {id=item.ID})" class="card_wrapper">
+                        <div class="card">
+                            @if (item.ImgPath != null)
+                            {
+                                <img class="card_img" src="~/Uploads/Courses/@item.ImgPath" alt="">
+                            }
+                            else
+                            {
+                                <img class="card_img" src="~/Uploads/images/alt img.jpg" alt="Nature Image">
+                            }
+                            <div class="card_info">
+                                <h2 class="card_name">@item.Name</h2>
+                                <h4 class="card_by">@item.Trainer.Name</h4>
+                            </div>
+                        </div>
+                    </a>
+                </swiper-slide>
+            }            
+        </swiper-container>
+    </div>
+
+    <div class="courses_slider">
+        <h1 class="slider_header">CATEGORIES</h1>
+        <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+                          slides-per-view="5">
+            <!--LOOP OVER SWIPER SLIDE-->
+            @foreach (var item in ViewBag.Categories)
+            {
+                <swiper-slide>
+                    <a href="@Url.Action("CatCourses", "Cours", new {id=item.ID})" class="card_wrapper">
+                        <div class="card">
+                            <img class="card_img" src="~/Uploads/images/alt img.jpg" alt="">
+                            <div class="card_info">
+                                <h2 class="card_name">@item.Name</h2>
+                                @*<h4 class="card_by">COURSE BY</h4>*@
+                            </div>
+                        </div>
+                    </a>
+                </swiper-slide>
+            }
+
+
+
+        </swiper-container>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

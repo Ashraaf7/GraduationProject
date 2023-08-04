@@ -1,0 +1,23 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Query Haystack whenever they send a message with low NLU confidence
+  steps:
+    - intent: nlu_fallback
+    - action: action_answer
+
+- rule: Query Haystack whenever they send a message roadmap keyword
+  steps:
+    - intent: ask_for_Roadmap
+    - action: action_roadmap
+
+- rule: Query Haystack whenever they send a message course keyword
+  steps:
+    - intent: ask_for_Course
+    - action: action_course

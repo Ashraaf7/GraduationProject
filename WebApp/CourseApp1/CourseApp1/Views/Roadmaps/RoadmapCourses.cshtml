@@ -1,0 +1,71 @@
+﻿@model IEnumerable<CourseApp1.data.Roadmap_courses>
+
+@{
+    ViewBag.Title = "RoadmapCourses";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+
+
+<div class="d-flex flex-row justify-content-start align-content-center px-5">
+    <a href="@Url.Action("Index","Roadmaps")" class="course_back"><span id="back_span" class="material-symbols-outlined">arrow_back_ios</span></a>
+    <h1 class="courses_header">@ViewBag.RoadName</h1>
+</div>
+<div id="line"></div>
+<div class="time">
+    @foreach (var item in Model)
+    {
+        <!--loop over div-->
+        <div class="roadmap_container">
+
+            <div class="text m-0 p-3 ">
+                <span class="roadmap_span position-absolute top-50 translate-middle badge rounded-pill">
+                    <h4>@item.Order</h4>
+                </span>
+                <a class="collapse_trigger text-decoration-none" data-bs-toggle="collapse" href="#a_@item.Id" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <h3 class="roadmap_text">@item.Name</h3>
+                </a>
+                <div class="collapse" id="a_@item.Id">
+                    <div class="collapse_card ">
+                        <ul class="list-unstyled">
+                            @if (item.RoadmapLinks.Count() > 0)
+                            {
+                                foreach (var links in item.RoadmapLinks)
+                                {
+                                    if (links.Name != null)
+                                    {
+                                        <li class="collapse_li">
+                                            <a href="@links.Link" class="text-decoration-none"><h3 class="collapse_text">@links.Name</h3></a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="collapse_li">
+                                            <a href="@links.Link" class="text-decoration-none"><h3 class="collapse_text">link</h3></a>
+                                        </li>
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                <li class="collapse_li">
+                                    <h3 class="collapse_text">No Recommended Links</h3>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end loop-->
+    }
+
+
+
+
+</div>
+@*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>*@
+@*<script src="~/js/index.js"></script>
+<script src="~/js/bootstrap/bootstrap.bundle.min.js"></script>*@

@@ -1,0 +1,113 @@
+﻿@*@model IEnumerable<CourseApp1.data.Cours>*@
+@model IPagedList<CourseApp1.data.Cours>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<style>
+    body{
+        width:100vw;
+    }
+</style>
+<body>
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@
+        <a href="@Url.Action("Create","Courses")">
+            <button class="btn btn btn-primary">Add Course</button>
+        </a>
+    </p>
+    @using (@Html.BeginForm("Index", "Courses", FormMethod.Get))
+    {
+        <div class="form-row">
+            <div class="col-auto">
+                @Html.TextBox("search", null, new { @class = "form-control rounded", placeholder = "search" })
+            </div>
+            <div class="col-auto">
+                <label title="Category_id" for="Category_id" />
+                @Html.DropDownList("Category_id", null, "--filter by Category--", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="col-auto">
+                <label title="Trainer_id" for="Trainer_id" />
+                @Html.DropDownList("Trainer_id", null, "--filter by Instructor--", htmlAttributes: new { @class = "form-control" })
+            </div>
+            <input type="submit" value="search" class="btn btn-facebook" />
+        </div>
+    }
+    <table class="table table-responsive">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ImgPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Creation_Date)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.First().Description)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.First().CourseLink)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Category.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Trainer.Name)
+            </th>
+            <th>
+                Students
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/Uploads/Courses/@item.ImgPath" alt="NO IMAGE FOR THIS COURSE" class="card-img" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Creation_Date)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseLink)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trainer.Name)
+                </td>
+                <td>
+                    <a href="@Url.Action("Index","trainee_courses",new { id = item.ID })">
+                        <button class="btn btn btn-primary">Students</button>
+                    </a>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
+                    <a href="@Url.Action("Details","Courses",new { id = item.ID })">
+                        <button class="btn btn btn-primary">Details</button>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+            new { page, search = Request.QueryString["search"], Category_id = Request.QueryString["Category_id"], Trainer_id = Request.QueryString["Trainer_id"] }))
+</body>

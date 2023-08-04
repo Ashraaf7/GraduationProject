@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CourseApp1.data.Room>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+
+}
+
+@*<h2>Rooms</h2>*@
+
+
+
+@*@foreach (var item in Model)
+    {
+        <div class="card text-center" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.RoomName)</h5>
+                <a href="@Url.Action("questions","RoomQuestions",new { id = item.RoomId })" class="btn btn-primary">Enter the room</a>
+            </div>
+        </div>
+
+    }*@
+<div class="courses_wrapper">
+    <div class="d-flex flex-row justify-content-start align-content-center">
+        <a href="home.html" class="course_back"><span id="back_span" class="material-symbols-outlined">arrow_back_ios</span></a>
+        <h1 class="courses_header">ROOMS</h1>
+    </div>
+    <div class="coursescards_wrapper">
+        <!--LOOP OVER A-->
+        @foreach (var item in Model)
+        {
+            <a href="@Url.Action("Questions","RoomQuestions1",new { id = item.RoomId })" class="room_link">
+                <div class="room">
+                    <h2 class="rooms_name">@item.RoomName</h2>
+                </div>
+            </a>
+        }
+
+
+    </div>
+
+</div>
+
+
+
+
+
+

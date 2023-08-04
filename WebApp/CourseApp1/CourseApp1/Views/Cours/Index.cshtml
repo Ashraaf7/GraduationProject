@@ -1,0 +1,85 @@
+﻿@*@model IEnumerable<CourseApp1.data.Cours>*@
+@model IPagedList<CourseApp1.data.Cours>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<div class="courses_wrapper">
+    <div class="d-flex flex-row justify-content-start align-content-center">
+        <a href="@Url.Action("Index","Default")" class="course_back"><span id="back_span" class="material-symbols-outlined">arrow_back_ios</span></a>
+        <h1 class="courses_header">COURSES</h1>
+    </div>
+
+    @using (@Html.BeginForm("Index", "Cours", FormMethod.Get, new { @class = "courses_form" }))
+    {
+        <div class="search_form">
+            @*<input type="text" class="search-input" id="searchcourse" placeholder="search a course">*@
+            @Html.TextBox("search", null, new { @class = "search-input", placeholder = "search a course" })
+            <button type="submit" class="search_button base_button">search</button>
+        </div>
+
+        <div class="form_select">
+            <label title="Category_id" for="Category_id" />
+            @Html.DropDownList("Category_id", null, "--filter by Category--", htmlAttributes: new { @class = "form-select" })
+            @*<select class="form-select" id="select_category" aria-label="Floating label select example">
+                    <option selected>-- filter by category --</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>*@
+        </div>
+
+        <div class="form_select">
+            <label title="Trainer_id" for="Trainer_id" />
+            @Html.DropDownList("Trainer_id", null, "--filter by Instructor--", htmlAttributes: new { @class = "form-select" })
+            @*<select class="form-select" id="select_instructor" aria-label="Floating label select example">
+                    <option selected>-- filter by instructor --</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>*@
+        </div>
+    }
+    @*<div class="search_form">
+            <input type="text" class="search-input" id="searchcourse" placeholder="search a course">
+            <button type="button" class="search_button base_button">search</button>
+        </div>*@
+
+
+
+
+
+
+    <div class="coursescards_wrapper">
+        <!--LOOP OVER CARD DIV-->
+        @foreach (var item in Model)
+        {
+            
+        <div class="card">
+            <button class="fav_button"><span class="nav_list_text material-symbols-outlined">favorite</span></button>
+            <a href="@Url.Action("Details", "Cours", new {id=item.ID})" class="card_wrapper">
+                @if (item.ImgPath != null)
+                {
+                    <img class="card_img" src="~/Uploads/Courses/@item.ImgPath" alt="">
+                }
+                else
+                {
+                    <img class="card_img" src="~/Uploads/images/alt img.jpg" alt="Nature Image">
+                }
+                <div class="card_info">
+                    <h2 class="card_name">@item.Name</h2>
+                    <h4 class="card_by">@item.Trainer.Name</h4>
+                </div>
+            </a>
+        </div>
+            
+        }
+
+    </div>
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+                new { page, search = Request.QueryString["search"], Category_id = Request.QueryString["Category_id"], Trainer_id = Request.QueryString["Trainer_id"] }))
+</div>
+

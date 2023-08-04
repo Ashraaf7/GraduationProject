@@ -1,0 +1,57 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - StartConversation
+  - ask_for_Roadmap
+  - ask_for_Course
+  
+actions:
+  - action_answer
+  - action_roadmap
+  - action_course
+
+entities:
+  - recommendation 
+  - courses
+
+slots:
+  recommendation:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: recommendation
+  courses:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: courses
+
+
+
+responses:
+  utter_StartConversation:
+  - text: "Welcome, I'm Codify bot, I'm here to help you. How i can help you today?"
+
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
